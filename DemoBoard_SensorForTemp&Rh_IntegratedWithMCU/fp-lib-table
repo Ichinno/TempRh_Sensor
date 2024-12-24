@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "kicad_community_lib")(type "KiCad")(uri "${KIPRJMOD}/hq_libs/kicad_community_lib.pretty")(options "")(descr "Added by HQ Online Symbol"))
+)

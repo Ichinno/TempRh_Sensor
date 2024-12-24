@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "E104-BT01")(type "KiCad")(uri "${KIPRJMOD}/hq_libs/E104-BT01.kicad_sym")(options "")(descr "Added by HQ Online Symbol"))
+  (lib (name "HC32L110C6UA-SFN20TR")(type "KiCad")(uri "${KIPRJMOD}/hq_libs/HC32L110C6UA-SFN20TR.kicad_sym")(options "")(descr "Added by HQ Online Symbol"))
+  (lib (name "HC32L110C6UA_QFN20")(type "KiCad")(uri "D:/CAD/MyLibrary/MCU/XHSC/HC32L110/HC32L110C6UA_QFN20.kicad_sym")(options "")(descr ""))
+  (lib (name "HC32L110C6UA_TSSOP20")(type "KiCad")(uri "D:/CAD/MyLibrary/MCU/XHSC/HC32L110/HC32L110C6UA_TSSOP20.kicad_sym")(options "")(descr ""))
+)
