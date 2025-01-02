@@ -1,0 +1,2078 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "2361b74a-18c7-4fd7-8447-c50dbf0c5bb4")
+	(paper "A4")
+	(lib_symbols
+		(symbol "power:GND"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "power:PWR_FLAG"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
+		(symbol "power:VCC"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VCC"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VCC\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VCC_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VCC_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 58.42 97.79) (xy 66.04 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0432e4a2-d456-4ade-9a7e-bd918a43fa50")
+	)
+	(wire
+		(pts
+			(xy 78.74 74.93) (xy 97.79 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06f7f8f4-d4e9-4608-8feb-e3dc1d649c97")
+	)
+	(wire
+		(pts
+			(xy 78.74 83.82) (xy 97.79 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0742719c-5296-4a8c-91ea-8d5afb7568ed")
+	)
+	(wire
+		(pts
+			(xy 127 68.58) (xy 127 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f216cfa-7da1-430d-b7bf-68d433540483")
+	)
+	(wire
+		(pts
+			(xy 78.74 86.36) (xy 97.79 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "391b347f-4ba1-49d5-97db-d219558be4c0")
+	)
+	(wire
+		(pts
+			(xy 35.56 179.07) (xy 39.37 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a9b8052-0b10-41d9-9612-a8bcdc4e84e7")
+	)
+	(wire
+		(pts
+			(xy 194.31 90.17) (xy 194.31 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3df2c26c-7c47-43eb-b921-51c6335867ec")
+	)
+	(wire
+		(pts
+			(xy 186.69 80.01) (xy 194.31 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e1ac0c1-3418-4a44-aa38-e570e960bf2b")
+	)
+	(wire
+		(pts
+			(xy 69.85 107.95) (xy 69.85 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "577c48e3-f54a-40f6-9ff0-ccdad438215a")
+	)
+	(wire
+		(pts
+			(xy 133.35 68.58) (xy 127 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fa8cfe0-a61f-4dc8-ba73-e7d282b32352")
+	)
+	(wire
+		(pts
+			(xy 78.74 120.65) (xy 90.17 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63d12028-ad88-43ec-98b3-020df5d88baf")
+	)
+	(wire
+		(pts
+			(xy 156.21 90.17) (xy 163.83 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7210b320-f2dd-4318-a31b-455aee1ff946")
+	)
+	(wire
+		(pts
+			(xy 78.74 118.11) (xy 87.63 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74087c98-7cfc-46ef-9483-2522b8c79888")
+	)
+	(wire
+		(pts
+			(xy 90.17 97.79) (xy 90.17 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75342fb3-9174-4647-99fe-7e622a31bb0c")
+	)
+	(wire
+		(pts
+			(xy 45.72 64.77) (xy 45.72 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a7afcfa-1431-4903-8dcd-a3bc88b02950")
+	)
+	(wire
+		(pts
+			(xy 35.56 182.88) (xy 39.37 182.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b24aef6-6181-44d6-96bc-2999228f1e06")
+	)
+	(wire
+		(pts
+			(xy 156.21 74.93) (xy 163.83 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8cbc23e8-5604-47ac-8c77-cf3f8f4a4d62")
+	)
+	(wire
+		(pts
+			(xy 33.02 187.96) (xy 39.37 187.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91b574be-c869-4445-a8f0-a703ce59c12d")
+	)
+	(wire
+		(pts
+			(xy 186.69 90.17) (xy 194.31 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b7b9452-4da2-4c94-8798-501f7b23f011")
+	)
+	(wire
+		(pts
+			(xy 156.21 95.25) (xy 163.83 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9eb3df2f-4d8b-4ba8-ac7c-6cb9ed567cec")
+	)
+	(wire
+		(pts
+			(xy 69.85 127) (xy 69.85 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1d7c8dd-d465-4414-a03f-8b68bc657086")
+	)
+	(wire
+		(pts
+			(xy 38.1 54.61) (xy 45.72 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a63ab46d-772d-49c9-a2fa-97a8bfe4d2e9")
+	)
+	(wire
+		(pts
+			(xy 156.21 82.55) (xy 163.83 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a914cbae-e66b-41dd-aef0-56923d84b9fa")
+	)
+	(wire
+		(pts
+			(xy 87.63 95.25) (xy 97.79 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab1500eb-5102-4b9e-b609-1981ca29d5cc")
+	)
+	(wire
+		(pts
+			(xy 58.42 92.71) (xy 66.04 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad8ad8f7-34f3-4173-9a98-da5498b52bfc")
+	)
+	(wire
+		(pts
+			(xy 97.79 97.79) (xy 90.17 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b95de132-0d14-4ffc-9ac3-e82be0e0e23a")
+	)
+	(wire
+		(pts
+			(xy 127 100.33) (xy 127 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d57d2fee-1105-429c-b3d8-2223e909c389")
+	)
+	(wire
+		(pts
+			(xy 38.1 64.77) (xy 45.72 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6ee5f68-4767-4bb1-b731-85ac042cedc4")
+	)
+	(wire
+		(pts
+			(xy 156.21 80.01) (xy 163.83 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d79407d8-6b1e-43ba-b2d6-58ef05ebe077")
+	)
+	(wire
+		(pts
+			(xy 78.74 80.01) (xy 97.79 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d91ff50e-0dad-41e9-99e6-20aae3550a56")
+	)
+	(wire
+		(pts
+			(xy 156.21 85.09) (xy 163.83 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2dd4299-73e8-4c35-b63b-66f3acd07800")
+	)
+	(wire
+		(pts
+			(xy 156.21 87.63) (xy 163.83 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e369b7e3-0a61-4e20-84ed-d634e8158044")
+	)
+	(wire
+		(pts
+			(xy 78.74 77.47) (xy 97.79 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eaf59bf8-3d21-4541-8b3f-656fa133298f")
+	)
+	(wire
+		(pts
+			(xy 58.42 101.6) (xy 58.42 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed1dd8a4-b3b2-4899-8b2f-7b698145fd13")
+	)
+	(wire
+		(pts
+			(xy 87.63 118.11) (xy 87.63 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ee7d766b-959e-449f-a20a-42ea25056782")
+	)
+	(wire
+		(pts
+			(xy 156.21 92.71) (xy 163.83 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef15c9ed-ec3e-4032-bc54-fff0fa7a20b4")
+	)
+	(wire
+		(pts
+			(xy 76.2 107.95) (xy 69.85 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4802d9e-fe88-4748-b6a6-c8b5dbeca437")
+	)
+	(rectangle
+		(start 19.05 167.64)
+		(end 50.8 191.77)
+		(stroke
+			(width 1)
+			(type dash_dot_dot)
+		)
+		(fill
+			(type none)
+		)
+		(uuid af192470-2573-4efc-8c10-4c9813eac7b1)
+	)
+	(text "特殊端口复用注意项：\n1. SWD端口上电后默认高电平，直至IO端口配置生效；\n2. P3.5(TX)上电时输出10ms高电平脉冲握手信号；\n3. P0.1&P0.2(XTH)在低功耗模式下，若两引脚电平不同，会有1-5uA电流，该两引脚应尽量处于相同状态。\n请注意以上引脚外围电路影响。"
+		(exclude_from_sim no)
+		(at 14.986 25.654 0)
+		(effects
+			(font
+				(face "华文新魏")
+				(size 3 3)
+				(thickness 0.4)
+				(bold yes)
+				(color 0 0 0 1)
+			)
+			(justify left)
+		)
+		(uuid "179f7c21-0a05-4b1a-9688-a98335f30609")
+	)
+	(text "Power_Flag"
+		(exclude_from_sim no)
+		(at 27.178 171.45 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.508)
+				(bold yes)
+			)
+		)
+		(uuid "4ebc1ead-7c44-4893-9b8a-48a084de7911")
+	)
+	(label "VCC"
+		(at 45.72 54.61 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2ecbdf74-b2ef-4047-b343-e597fdabf747")
+	)
+	(label "VCC"
+		(at 76.2 107.95 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4595b473-7dcf-4ab4-acee-9e0347db765a")
+	)
+	(label "VCC"
+		(at 133.35 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "47c36493-d6b7-4a62-b3cf-8c99cbd5651c")
+	)
+	(label "VCC"
+		(at 33.02 187.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4c50b816-80e5-416d-8126-a391410c73c2")
+	)
+	(label "VCC"
+		(at 58.42 92.71 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "717d3bab-f43a-48b2-9e69-667e476c8bcc")
+	)
+	(label "SDA"
+		(at 90.17 95.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8593514c-de9d-44fa-9549-08d2f533e33d")
+	)
+	(label "SCL"
+		(at 90.17 97.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cc342190-ccb5-4795-8a19-94f3a9199d58")
+	)
+	(label "VCC"
+		(at 194.31 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fa661340-659a-4950-9171-ad022411665c")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 194.31 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "53e1be53-c14d-4fe5-8f4b-6878c160dd94")
+		(property "Reference" "#PWR04"
+			(at 194.31 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 194.31 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 194.31 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 194.31 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 194.31 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "13301607-ee47-42a9-b909-61f1c4faf837")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 69.85 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7407d88a-df16-4d95-acf0-63444439936d")
+		(property "Reference" "#PWR02"
+			(at 69.85 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 69.85 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 69.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 69.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 69.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0d2be744-2447-4229-b250-0712d773da45")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 39.37 179.07 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "92eca079-2a77-4ca0-b1f1-a03d4fd9e12b")
+		(property "Reference" "#PWR05"
+			(at 45.72 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 43.18 179.0699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 39.37 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8b88058a-836e-4cfa-aa23-c947fe5dbd72")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 39.37 182.88 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "971b5e2a-c2bd-4aa4-8b59-43ba3f29d43f")
+		(property "Reference" "#PWR07"
+			(at 35.56 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 43.18 182.8799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 39.37 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5d7cbea8-8d1b-4a95-872b-d5131ece6eff")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR07")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 58.42 101.6 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c809e739-1269-4665-b836-716686261733")
+		(property "Reference" "#PWR08"
+			(at 58.42 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 58.42 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 58.42 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 58.42 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e9540a58-7fda-4f9c-a91c-5447e9b90fbb")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 35.56 179.07 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cc786767-734e-4242-906d-36b2541cb8f6")
+		(property "Reference" "#FLG01"
+			(at 33.655 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 31.75 179.0699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 35.56 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 35.56 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "07b05ae2-b365-4459-9b5b-2a93a94b6c88")
+		)
+		(instances
+			(project ""
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 39.37 187.96 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ea471f14-eb11-4b27-8afb-e9a952de82c3")
+		(property "Reference" "#PWR06"
+			(at 35.56 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 43.18 187.9599 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 39.37 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2021091e-2254-48db-b3bc-cb6cf3efb0bc")
+		)
+		(instances
+			(project ""
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 35.56 182.88 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ed86d9e9-3238-48a9-9949-4fea29fcde21")
+		(property "Reference" "#FLG02"
+			(at 33.655 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 31.75 182.8799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 35.56 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 35.56 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 35.56 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9afb0793-f56c-40ba-bee0-5089f72f57bb")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 45.72 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f8159466-b985-4c35-b701-7f1cade34ba0")
+		(property "Reference" "#PWR01"
+			(at 45.72 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 45.72 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 45.72 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "33660e33-6572-4afc-83f7-d16e21650137")
+		)
+		(instances
+			(project ""
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 127 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fda392fd-7c54-47ff-bb7e-42a75a759fff")
+		(property "Reference" "#PWR03"
+			(at 127 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 127 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 127 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 127 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9d01716b-61e8-470c-8a40-c4591e60669c")
+		)
+		(instances
+			(project "SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 163.83 72.39)
+		(size 22.86 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "614aaa04-27e2-4092-b3ba-672630569390")
+		(property "Sheetname" "E104-BT01"
+			(at 163.83 71.6784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "E104-BT01.kicad_sch"
+			(at 163.83 98.3746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "DATA" input
+			(at 163.83 87.63 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "579c3d91-9d0b-4b26-a1f0-4c55f229df3a")
+		)
+		(pin "VDD" input
+			(at 186.69 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "7b2c28da-5d48-4763-9ef5-851bca249c2a")
+		)
+		(pin "LINK" input
+			(at 163.83 92.71 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "acc23ead-6375-4b0d-9c11-072913293a77")
+		)
+		(pin "DISC" input
+			(at 163.83 95.25 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "34167e82-2543-4a2b-9c2b-4ad59e8ca414")
+		)
+		(pin "WKP" input
+			(at 163.83 85.09 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "98ad8ead-251d-43f1-b9c0-9595d13615aa")
+		)
+		(pin "TX" input
+			(at 163.83 82.55 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "d39a256c-fa6f-4207-8b4b-1cbc81f15ce8")
+		)
+		(pin "RX" input
+			(at 163.83 80.01 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "3c8b3880-896e-421f-a2ef-63956bbea1be")
+		)
+		(pin "RST" input
+			(at 163.83 74.93 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6d9cd92a-1d92-412b-8627-c68507af1db4")
+		)
+		(pin "MOD" input
+			(at 163.83 90.17 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6074f228-099c-4f85-a537-049ea9c197c7")
+		)
+		(pin "VSS" input
+			(at 186.69 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b2e8703f-2760-4e46-851a-bf28797f0c90")
+		)
+		(instances
+			(project "DemoBoard_SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 21.59 52.07)
+		(size 16.51 15.24)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a4215a02-864d-4ea4-b0bf-5ed98cb4c69b")
+		(property "Sheetname" "CR2477 Module"
+			(at 21.59 51.3584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "CR2477 Module.kicad_sch"
+			(at 21.59 67.8946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "VCC" input
+			(at 38.1 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "49e139de-c223-40d6-a784-04bbe017f3cd")
+		)
+		(pin "VSS" input
+			(at 38.1 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b35da559-1418-4847-a28b-5f69eed11607")
+		)
+		(instances
+			(project "DemoBoard_SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 97.79 72.39)
+		(size 58.42 27.94)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e8bdffae-02eb-4144-b7f4-0c74e805f158")
+		(property "Sheetname" "HC32L110_QFN20"
+			(at 97.79 71.6784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "HC32L110_QFN20.kicad_sch"
+			(at 97.79 100.9146 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "RST" input
+			(at 156.21 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4fefa8b8-c9e9-47e4-b2fc-a29ead1848e5")
+		)
+		(pin "VDD" input
+			(at 127 72.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "448c0dc1-1225-4d88-8d2b-7857748dbe53")
+		)
+		(pin "SPI_CS" input
+			(at 97.79 74.93 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8ed4a463-4833-4db4-a352-d28044bc7823")
+		)
+		(pin "P0.3" input
+			(at 97.79 86.36 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "defdd17f-a547-4c70-a516-bb33984d3f1a")
+		)
+		(pin "P2.3" input
+			(at 97.79 83.82 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "177e22ad-d27b-49bd-a0c5-1605240146bd")
+		)
+		(pin "P0.2" input
+			(at 156.21 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "46d37160-dc42-4754-a080-fc0dc50fdf88")
+		)
+		(pin "P0.1" input
+			(at 156.21 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d0eb5b6c-2e3b-468b-a517-b67c5bc8194a")
+		)
+		(pin "I2C_SDA" input
+			(at 97.79 95.25 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5913bc89-58f2-42be-96da-f8d8ea4d7151")
+		)
+		(pin "I2C_SCL" input
+			(at 97.79 97.79 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "b891905b-13b6-42fb-b0ac-0ed60c0c1168")
+		)
+		(pin "SPI_SCK" input
+			(at 97.79 77.47 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "997163e4-1be5-4fb9-a2af-cfe99e89f923")
+		)
+		(pin "LPUART_RX" input
+			(at 156.21 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "65f0958f-3cb0-45ab-9042-c8425c91f832")
+		)
+		(pin "LPUART_TX" input
+			(at 156.21 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b4f4bf58-46eb-45d0-8a7d-1d4461ec94b6")
+		)
+		(pin "P3.2" input
+			(at 156.21 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "a7e7b97b-ba0b-4852-921e-78566c95ec96")
+		)
+		(pin "P3.1" input
+			(at 156.21 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f3181685-a2b0-4596-a198-e7c02b7dd00c")
+		)
+		(pin "SPI_MOSI" input
+			(at 97.79 80.01 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "75f39d95-3219-434c-ac8b-bc9208f08b6e")
+		)
+		(pin "P2.7" input
+			(at 156.21 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4204232f-d189-4396-a2a0-eab8a3c87076")
+		)
+		(pin "VSS" input
+			(at 127 100.33 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "885d3b03-9bb5-40b3-815c-6301d6384f16")
+		)
+		(instances
+			(project "DemoBoard_SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 60.96 111.76)
+		(size 17.78 15.24)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e98aef6c-9e8e-40e3-b5fc-28c8de147de3")
+		(property "Sheetname" "Sensor_AHT20"
+			(at 57.404 119.888 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "HierSch/Demo_AHT20.kicad_sch"
+			(at 44.958 107.188 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(pin "SCL_s" input
+			(at 78.74 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "7d000732-ad5c-4de4-8b41-0219d4560fdc")
+		)
+		(pin "SDA_s" input
+			(at 78.74 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "561239da-26ce-40d4-b37a-2315ec541c88")
+		)
+		(pin "VDD" input
+			(at 69.85 111.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9168bcfa-caf3-4545-9781-1f74887cdaec")
+		)
+		(pin "VSS" input
+			(at 69.85 127 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "ee2922ce-c07a-4b0e-9eaf-1dab076a2009")
+		)
+		(instances
+			(project "DemoBoard_SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 66.04 72.39)
+		(size 12.7 27.94)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "fe8e2e53-6e47-4ebf-a0a8-d3d6a7826289")
+		(property "Sheetname" "E-Ink Driver"
+			(at 66.04 71.6784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "E-Ink Driver.kicad_sch"
+			(at 66.04 100.9146 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "SPI_SCK" input
+			(at 78.74 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "743a2413-ef87-405f-a703-2711d356f7cd")
+		)
+		(pin "VDD" input
+			(at 66.04 92.71 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "efa2d948-2fde-4c42-a42d-50185dabaa93")
+		)
+		(pin "VSS" input
+			(at 66.04 97.79 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e01fdb42-09de-4716-97ec-b67336a7b9ab")
+		)
+		(pin "SPI_SDA" input
+			(at 78.74 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "92b28514-97d1-4cf3-a0cc-1bfa03b81177")
+		)
+		(pin "SPI_CS" input
+			(at 78.74 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "65a0d13c-5d07-4ab5-873e-7201ea6b72a3")
+		)
+		(pin "nRST" input
+			(at 78.74 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ea9786b1-b9d5-49a0-8a53-4df8ff9a411f")
+		)
+		(pin "nDC" input
+			(at 78.74 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0fb6ff44-8674-4458-921b-2c2f9f2229e8")
+		)
+		(instances
+			(project "DemoBoard_SensorForTemp&Rh_IntegratedWithMCU"
+				(path "/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

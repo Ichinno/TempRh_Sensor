@@ -5,7 +5,7 @@
 	(uuid "2361b74a-18c7-4fd7-8447-c50dbf0c5bb4")
 	(paper "A4")
 	(lib_symbols
-		(symbol "power:GND"
+		(symbol "Library:GND"
 			(power)
 			(pin_numbers hide)
 			(pin_names
@@ -101,7 +101,7 @@
 				)
 			)
 		)
-		(symbol "power:PWR_FLAG"
+		(symbol "Library:PWR_FLAG"
 			(power)
 			(pin_numbers hide)
 			(pin_names
@@ -197,7 +197,7 @@
 				)
 			)
 		)
-		(symbol "power:VCC"
+		(symbol "Library:VCC"
 			(power)
 			(pin_numbers hide)
 			(pin_names
@@ -816,7 +816,7 @@
 		(uuid "fa661340-659a-4950-9171-ad022411665c")
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 194.31 100.33 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -882,7 +882,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 69.85 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -948,7 +948,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 39.37 179.07 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1015,7 +1015,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VCC")
+		(lib_id "Library:VCC")
 		(at 39.37 182.88 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1082,7 +1082,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 58.42 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1148,7 +1148,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
+		(lib_id "Library:PWR_FLAG")
 		(at 35.56 179.07 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1215,7 +1215,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VCC")
+		(lib_id "Library:VCC")
 		(at 39.37 187.96 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1282,7 +1282,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
+		(lib_id "Library:PWR_FLAG")
 		(at 35.56 182.88 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1349,7 +1349,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 45.72 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1415,7 +1415,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Library:GND")
 		(at 127 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)

@@ -1,0 +1,105 @@
+(footprint "TestPad_3x2mm_forTestHook"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "Only use for circuit test with hook")
+	(tags "hook testpad 3x2")
+	(property "Reference" "REF**"
+		(at 0 -1.796051 180)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "9e086f03-9fb6-4030-8d11-493279146d0d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+		)
+	)
+	(property "Value" "TestPad_3x2mm_forTestHook"
+		(at 0 1 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "c54d7800-6149-4024-b539-50c1fba26559")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a01f895a-9004-4ad1-8904-68f686193025")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9c6cce1c-31f1-45b0-b76b-7a9d5ce317d2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "219f7863-4dd8-40ac-8852-38e3420d21a4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd board_only)
+	(fp_poly
+		(pts
+			(xy -1.6 -1.1) (xy 1.6 -1.1) (xy 1.6 1.1) (xy -1.6 1.1)
+		)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill none)
+		(layer "F.CrtYd")
+		(uuid "b1a61443-2450-4000-ae8d-0806d8e4c00c")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "01faccff-33bb-4133-8869-676ee0cc0fcc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at 0 0 180)
+		(size 3 2)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.25)
+		(thermal_bridge_angle 45)
+		(uuid "4be24616-cd73-464e-bbc1-c8440ef8522a")
+	)
+)

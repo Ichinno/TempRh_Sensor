@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.2,
-          "height": 2.2,
-          "width": 2.2
+          "drill": 0.0,
+          "height": 0.5,
+          "width": 1.0
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -58,14 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "clearance|136309100|102025900|6b2cf744-eaa7-41e8-8361-e6b58e67f1fb|8a9e3ade-ad74-4822-916a-89991d2eb976",
-        "clearance|136432055|101902945|b4340f0b-9572-45ec-81ee-96824e6e76d8|ba935d22-6d8b-42ee-8b35-91022ec8ca51",
-        "clearance|136696852|101638148|575e9a84-6aaa-41d2-9534-f1a2c8adb5f2|8a9e3ade-ad74-4822-916a-89991d2eb976",
-        "clearance|136696852|101638148|575e9a84-6aaa-41d2-9534-f1a2c8adb5f2|ba935d22-6d8b-42ee-8b35-91022ec8ca51",
-        "clearance|136696852|101638148|b4340f0b-9572-45ec-81ee-96824e6e76d8|8a9e3ade-ad74-4822-916a-89991d2eb976",
-        "courtyards_overlap|95326454|68707397|a1f9010b-ff90-4451-b954-cdccdaed41b7|18adca6b-5548-4be5-a486-a567e96ff1c3"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -313,9 +306,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      "power_pin_not_driven|584200|609600|12e22519-6970-4012-850d-e6852d382c81|00000000-0000-0000-0000-000000000000|/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4/e98aef6c-9e8e-40e3-b5fc-28c8de147de3|/2361b74a-18c7-4fd7-8447-c50dbf0c5bb4/e98aef6c-9e8e-40e3-b5fc-28c8de147de3|"
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -833,7 +824,7 @@
         }
       ],
       "filter_string": "",
-      "group_symbols": false,
+      "group_symbols": true,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"

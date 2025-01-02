@@ -11,7 +11,7 @@
 		(company "Ebyte")
 	)
 	(lib_symbols
-		(symbol "E104-BT01:E104-BT01"
+		(symbol "Library:E104-BT01"
 			(pin_names
 				(offset 1.0142)
 			)
@@ -954,7 +954,7 @@
 		(uuid "f2f0da8c-b92c-4c94-9c87-6c2e6010ee16")
 	)
 	(symbol
-		(lib_id "E104-BT01:E104-BT01")
+		(lib_id "Library:E104-BT01")
 		(at 53.34 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)

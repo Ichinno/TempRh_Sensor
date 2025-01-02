@@ -1,0 +1,512 @@
+(footprint "LGA-6_3x3mm_P1.00mm"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "ASAIR AHT20")
+	(tags "AHT20 LGA LGA-6")
+	(property "Reference" "REF**"
+		(at 0 2.413 180)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "b435fea3-e0c7-4bad-b898-1d8bd2611a56")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "~"
+		(at 0 -2.667 180)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c017c391-37f6-4854-9508-e565115819d2")
+		(effects
+			(font
+				(size 0.762 0.762)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" "Package_LGA:LGA-6_3x3mm_P1.00mm"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5525d613-3628-4982-9d5d-5a5b10d4c986")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5f2b8c42-ffde-4731-b1ec-be86d2b09b0e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "Temperature And Humidity Sensor SMD6 2~5.5V"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "db02f6dc-d163-4dba-ab9e-45c15a11aafe")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mpn" "AHT20"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5f0aff97-1801-405d-a901-3af1bd6087bf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "ASAIR"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0d7c57ec-cb26-4060-9a99-fd756f10667a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Accuracy" "2 %"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "325cdd93-7f18-4c61-aeea-045f4c4970e2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Application" "Consumer，Industrial"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "217b9307-6d88-4088-9a0e-f16cf5f6ff3d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Grade" "Consumer"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3dfc27d3-fbe7-403f-884f-e3453d85eb88")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Height" "1.00 mm"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e7d1db37-7cec-4cfe-9029-d959f870827b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Interface" "I²C"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e3dbeb87-2d6d-4368-b3da-8d2826c44f33")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Lead Free" "Yes"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4d7a3eee-2ea8-474b-ae51-67cce4daf482")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Moisture Sensitive" "0~100%RH"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1a8a0af9-3958-4814-9f7f-b1575ba70f6c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Mount" "SMT"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b53cc320-825d-40d7-8759-59e8f275e744")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Operating Temperature" "85 °C"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e34b703f-9fd7-43bd-9c1d-967dcc766bf0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Output Configuration" "-"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d4c70668-dc70-4bbc-bf83-3262233b4f1b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Output Type" "数字的"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a9d62c7-9674-417e-b4eb-ea2df421e465")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Package" "DFN-6(3x3)"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4652feed-e858-439f-a92b-2aea399f2c5f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Pins" "6 defualt"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fc1362bf-d8b5-4475-9e30-1723133c2eaa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Sensor Types" "湿度，温度"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "20352307-f05a-427c-9885-0d608b316c90")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Series" "AHT20"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "60e1fe7b-583d-4fb6-9fb6-9df133e1b373")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supply Voltage" "5.5 V"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e682a7ab-61e1-41e3-9179-70f06a05ba1f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Turn-On Time" "8 s"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6af95d25-474a-4967-9c09-e9a907a356f3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "_INVALID_DATA" "AHT20"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "aeb37878-0f49-461d-9689-69547b0543a7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "packaging" "5000pcs"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2791435e-c6ca-4c67-8fb9-761babf28a20")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Type" "AHT20"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4f926754-6719-45dd-84a1-c85d9a42805b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_line
+		(start -1.3 -1.72)
+		(end 1.3 -1.72)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "886080d6-96ba-4d4a-91d9-fe968de7b620")
+	)
+	(fp_line
+		(start 1.3 1.72)
+		(end -1.3 1.72)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "c4e22491-d718-440e-ab54-22670e15fd90")
+	)
+	(fp_circle
+		(center -1.7 -1.7)
+		(end -1.9 -1.7)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill solid)
+		(layer "F.SilkS")
+		(uuid "d19b8840-767a-439f-897d-c504bb4905ee")
+	)
+	(fp_line
+		(start -1.95 -1.5)
+		(end -1.95 1.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "30db27ef-bdc6-4076-a975-fc56c9f0e616")
+	)
+	(fp_line
+		(start -1.95 1.5)
+		(end 1.95 1.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "abea28f2-01ff-412c-a859-8afbd5dcc2ad")
+	)
+	(fp_line
+		(start 1.95 -1.5)
+		(end -1.95 -1.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "cd9349be-e034-43dd-9272-d7bf54242a5f")
+	)
+	(fp_line
+		(start 1.95 1.5)
+		(end 1.95 -1.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "20b3e3eb-4a51-425b-8a00-cdd649f7d19d")
+	)
+	(fp_poly
+		(pts
+			(xy 1.499 -1.5) (xy -1.499 -1.5) (xy -1.5 -1.5) (xy -1.6 -1.499) (xy -1.6 1.499) (xy -1.5 1.5) (xy -1.499 1.5)
+			(xy 1.499 1.5) (xy 1.5 1.5) (xy 1.6 1.499) (xy 1.6 -1.499) (xy 1.5 -1.5)
+		)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(fill none)
+		(layer "F.Fab")
+		(uuid "fbb32262-8235-4e05-bad8-50206e0b5e7e")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(uuid "d0ed5d4a-2736-4500-a738-1e02590c62bb")
+		(effects
+			(font
+				(size 0.762 0.762)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -1.25 -1 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "0131001a-6460-4710-8cdd-b69bbeded239")
+	)
+	(pad "2" smd rect
+		(at -1.25 0 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "948483c9-2f19-4df9-ad58-5bd0ad89da24")
+	)
+	(pad "3" smd rect
+		(at -1.25 1 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "57a447f4-b302-4e0d-a758-71c83e10468b")
+	)
+	(pad "4" smd rect
+		(at 1.25 1 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "6e733c05-0373-4d88-95dc-a62a9fbe7586")
+	)
+	(pad "5" smd rect
+		(at 1.25 0 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "8afcedb4-746e-40b0-b3fa-64766124edb6")
+	)
+	(pad "6" smd rect
+		(at 1.25 -1 180)
+		(size 1.1 0.5)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(solder_mask_margin 0.05)
+		(thermal_bridge_angle 45)
+		(uuid "392e8226-4338-4fdd-995e-ab7016c2601e")
+	)
+	(model "D:/CAD/MyLibrary/TEXAS INSTRUMENTS/3D/HDC1080.stp"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 180)
+		)
+	)
+)
