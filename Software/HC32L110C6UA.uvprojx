@@ -450,6 +450,16 @@
               <FileType>1</FileType>
               <FilePath>.\driver\src\spi.c</FilePath>
             </File>
+            <File>
+              <FileName>draw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\source\draw.c</FilePath>
+            </File>
+            <File>
+              <FileName>epd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\source\epd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
