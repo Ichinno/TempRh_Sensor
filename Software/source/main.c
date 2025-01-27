@@ -33,34 +33,12 @@
 #include "clk.h"
 #include "i2c.h"
 #include "waveinit.h"
-#include "spi.h"
-//#include "image.h"
+#include "epd.h"
+#include "draw.h"
 
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                            
  ******************************************************************************/
-#define DC_H    Gpio_SetIO(0, 3, 1) //DC输出高
-#define DC_L    Gpio_SetIO(0, 3, 0) //DC输出低
-#define RST_H   Gpio_SetIO(2, 3, 1) //RST输出高
-#define RST_L   Gpio_SetIO(2, 3, 0) //RST输出低
-// 测试图
-#define PIC_WHITE                   255  // 全白
-#define PIC_BLACK                   254  // 全黑
-#define PIC_Orientation             253  // 方向图
-#define PIC_CHESSBOARD              252  // 单像素棋盘格
-#define PIC_Source_Line             251  // Source线
-#define PIC_Gate_Line               250  // Gate线
-#define PIC_LEFT_BLACK_RIGHT_WHITE  249  // 左黑右白
-#define PIC_UP_BLACK_DOWN_WHITE     248  // 上黑下白
-
-// 用户自定义Demo图
-#define PIC_01                        1
-#define PIC_02                        2
-#define PIC_03                        3
-#define PIC_04                        4
-#define PIC_05                        5
-#define PIC_06                        6
-
 
 /******************************************************************************
  * Global variable definitions (declared in header file with 'extern')
@@ -87,6 +65,7 @@
  ******************************************************************************/
 uint8_t cmd[3] = {0xAC,0x33,0x00};
 uint8_t u8Recdata[8]={0x00};
+
 
 static void uartPrintf(const char *format, ...) 
 {
@@ -352,298 +331,7 @@ static float humidityConvert(uint32_t d0, uint32_t d1, uint32_t d2)
     return result;
 }
 
-static void spiWriteCmd(uint8_t cmd)
-{
-    DC_L;
-    Spi_SetCS(TRUE);
-    Spi_SetCS(FALSE);
-    Spi_SendData(cmd);
-    Spi_SetCS(TRUE);
-}
 
-static void spiWriteData(uint8_t data)
-{
-    DC_H;
-    Spi_SetCS(TRUE);
-    Spi_SetCS(FALSE);
-    Spi_SendData(data);
-    Spi_SetCS(TRUE);
-    DC_L;
-}
-
-static void spiInit(void)
-{
-	  stc_spi_config_t  SPIConfig;
-
-    Clk_SetPeripheralGate(ClkPeripheralSpi,TRUE); //SPI外设时钟打开
-    Gpio_InitIO(2, 3, GpioDirOut);
-    Gpio_SetIO(2, 3, 1);               //RST输出高
-    Gpio_InitIO(0, 3, GpioDirOut);
-    Gpio_SetIO(0, 3, 0);               //DC输出高
-
-    Gpio_SetFunc_SPICS_P14();
-    Gpio_SetFunc_SPIMOSI_P24();
-    Gpio_SetFunc_SPICLK_P15();
-    
-    Spi_SetCS(TRUE);
-    //配置SPI
-    SPIConfig.bCPHA = Spicphafirst;
-    SPIConfig.bCPOL = Spicpollow;
-    SPIConfig.bIrqEn = FALSE;
-    SPIConfig.bMasterMode = SpiMaster;
-    SPIConfig.u8BaudRate = SpiClkDiv2;
-    SPIConfig.pfnIrqCb = NULL;
-
-    Spi_Init(&SPIConfig);
-
-}
-
-static void resetSsd1675(void)
-{
-    Spi_SetCS(TRUE);
-    DC_L;
-    RST_H;
-    delay1ms(100);                
-    RST_L;
-    delay1ms(10);                
-    RST_H;
-    delay1ms(5000);
-    spiWriteCmd(0x12);   //  
-    delay1ms(5000);
-
-}
-
-// 写波形数据表 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-void writeLut()
-{
-  unsigned char i;
-  
-  spiWriteCmd(0x32);   // write LUT register
-  for(i=0;i<70;i++)       // write LUT register 20160527
-    spiWriteData(init_data[i]);
-}
-
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-//xx   图片显示函数    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-void DIS_IMG(unsigned char num)
-{
-  unsigned int row, col;
-  unsigned int pcnt;
-
-  spiWriteCmd(0x4E);   // set RAM x address count to 0;
-  spiWriteData(0x00);
-  spiWriteCmd(0x4F);   // set RAM y address count to 151;
-  spiWriteData(0x97);
-  spiWriteData(0x00);
-        
-  spiWriteCmd(0x24);   //
-  pcnt = 0;                     // 复位或保存提示字节序号
-  for(col=0; col<152; col++)    // 152 GATE
-  {
-    for(row=0; row<19; row++)   // 总共128 SOURCE，每个像素1bit,即 152/8=19 字节
-    {
-      switch (num)
-      {
-        case PIC_WHITE:
-          spiWriteData(0xff);
-          break;  
-
-        case PIC_BLACK:
-          spiWriteData(0x00);
-          break;  
-          
-        case PIC_CHESSBOARD:
-          if(col%2)
-              spiWriteData(0xaa);  // 奇数Gate行
-          else
-              spiWriteData(0x55);  // 偶数Gate行
-          break;  
-                                        
-        case PIC_Source_Line:
-          spiWriteData(0xaa);
-          break;  
-                                        
-        case PIC_Gate_Line:
-          if(col%2)
-              spiWriteData(0xff);  // 奇数Gate行
-          else
-              spiWriteData(0x00);  // 偶数Gate行
-          break;  
-                                        
-        case PIC_LEFT_BLACK_RIGHT_WHITE:
-          if(col>=76)
-            spiWriteData(0xff);
-          else
-            spiWriteData(0x00);
-          break;
-                                        
-        case PIC_UP_BLACK_DOWN_WHITE:
-          if(row>9)
-            spiWriteData(0xff);
-          else if(row==9)
-            spiWriteData(0x0f);
-          else
-            spiWriteData(0x00);
-          break;  
-                                        
-        // case PIC_01:
-        //   spiWriteData(gImage_01[pcnt]);
-        //   break;
-
-        // case PIC_02:
-        //   spiWriteData(gImage_02[pcnt]);
-        //   break;
-
-        // case PIC_03:
-        //   spiWriteData(gImage_03[pcnt]);
-        //   break;
-
-        // case PIC_04:
-        //   spiWriteData(gImage_04[pcnt]);
-        //   break;
-
-        // case PIC_05:
-        //   spiWriteData(gImage_05[pcnt]);
-        //   break;
-
-        // case PIC_06:
-        //   spiWriteData(gImage_06[pcnt]);
-        //   break;
-
-        default:
-          break;
-        }
-      pcnt++;
-    }
-  }
-  spiWriteCmd(0x20);
-  delay1ms(5000);
-}
-
-// 电子纸驱动初始化 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-static void initSsd1675()
-{
-  resetSsd1675();                      // 电子纸控制器复位
-  spiWriteCmd(0x74);       // Set Analog Block Control
-    spiWriteData(0x54);    // A[8:0]=
-  spiWriteCmd(0x7E);       // Set Analog Block Control
-    spiWriteData(0x3B);    // A[8:0]=
-  spiWriteCmd(0x01);       // Gate Setting
-    spiWriteData(0x97);    // A[8:0]=0x0097(Set Mux for 151（0x0097）+1=152)
-    spiWriteData(0x00);    // A[8:0]=0x0097(Set Mux for 151（0x0097）+1=152)
-    spiWriteData(0x00);    // B[2]:GD=0[POR](G0 is the 1st gate output channel)  B[1]:SM=0[POR](left and right gate interlaced)  B[0]:TB=0[POR](scan from G0 to G319)
-
-  spiWriteCmd(0x0C);       // Booster Soft Start Setting
-    spiWriteData(0x8B);    // 0x8B
-    spiWriteData(0x9C);    // 0x9C
-//    spiWriteData(0x86);    // 0x86 for str 1            
-//    spiWriteData(0x96);    // 0x96[POR] for str 2,  3.0V电源、30V压差、点图VGH从 V下降到 V；2.0V电源、30V压差、点图VGH从 V下降到 V；         
-    spiWriteData(0xA6);    // 0xA6 for str 3   2.0V电源、30V压差、点图VGH从 V下降到 V，，就选这个         
-//    spiWriteData(0xB6);    // 0xB6 for str 4     
-//    spiWriteData(0xC6);    // 0xC6 for str 5            
-//    spiWriteData(0xD6);    // 0xD6 for str 6            
-//    spiWriteData(0xE6);    // 0xE6 for str 7            
-//    spiWriteData(0xF6);    // 0xF6 for str 8       
-    spiWriteData(0x0F);    // Set Digital Block Control
-
-
-  spiWriteCmd(0x03);       // Gate Driving voltage
-    spiWriteData(0x19);    // A[4:0] = 19h [POR] , VGH at 21V [POR]  实测VGH=+21.1V~+21.4V，VGL=-21.0V
-
-
-  spiWriteCmd(0x04);       // Source Driving voltage
-    spiWriteData(0x41);    // A[7:0] = 41h [POR], VSH1 at 15V
-//    spiWriteData(0x3C);    // A[7:0] = 3Ch [POR], VSH1 at 14V
-//    spiWriteData(0x37);    // A[7:0] = 37h [POR], VSH1 at 13V
-//    spiWriteData(0x32);    // A[7:0] = 32h [POR], VSH1 at 12V
-//    spiWriteData(0x2D);    // A[7:0] = 2Dh [POR], VSH1 at 11V
-//    spiWriteData(0x28);    // A[7:0] = 28h [POR], VSH1 at 10V
-//    spiWriteData(0x23);    // A[7:0] = 23h [POR], VSH1 at  9V
-//    spiWriteData(0x22);    // A[7:0] = 22h [POR], VSH1 at  8.8V
-//    spiWriteData(0xC6);    // A[7:0] = C6h [POR], VSH1 at  8V
-//    spiWriteData(0xBC);    // A[7:0] = BCh [POR], VSH1 at  7V
-//    spiWriteData(0xB2);    // A[7:0] = B2h [POR], VSH1 at  6V
-//    spiWriteData(0xA8);    // A[7:0] = A8h [POR], VSH1 at  5V
-//    spiWriteData(0x9E);    // A[7:0] = C6h [POR], VSH1 at  4V
-//    spiWriteData(0x94);    // A[7:0] = C6h [POR], VSH1 at  3V
-
-    spiWriteData(0xA8);    // B[7:0] = A8h [POR], VSH2 at  5V
-
-    spiWriteData(0x32);    // C[7:0] = 32h [POR], VSL at -15V
-//    spiWriteData(0x2E);    // C[7:0] = 2Eh [POR], VSL at -14V
-//    spiWriteData(0x2A);    // C[7:0] = 2Ah [POR], VSL at -13V
-//    spiWriteData(0x26);    // C[7:0] = 26h [POR], VSL at -12V
-//    spiWriteData(0x22);    // C[7:0] = 22h [POR], VSL at -11V
-//    spiWriteData(0x1E);    // C[7:0] = 1Eh [POR], VSL at -10V
-//    spiWriteData(0x1A);    // C[7:0] = 1Ah [POR], VSL at  -9V
-//    spiWriteData(0x19);    // C[7:0] = 19h [POR], VSL at  -8.8V
-//    spiWriteData(0x16);    // C[7:0] = 16h [POR], VSL at  -8V
-//    spiWriteData(0x12);    // C[7:0] = 12h [POR], VSL at  -7V
-//    spiWriteData(0x0E);    // C[7:0] = 0Eh [POR], VSL at  -6V
-//    spiWriteData(0x0A);    // C[7:0] = 0Ah [POR], VSL at  -5V
-//    spiWriteData(0x06);    // C[7:0] = 06h [POR], VSL at  -4V
-//    spiWriteData(0x02);    // C[7:0] = 06h [POR], VSL at  -3V
-
-
-  spiWriteCmd(0x3A);       // number of dummy line period   set dummy line for 50Hz frame freq
-    spiWriteData(0x11);    // A[6:0]=0(Number of dummy line period in term of TGate)  
-  spiWriteCmd(0x3B);       // Gate line width   set gate line for 50Hz frame freq
-    spiWriteData(0x0D);    // A[3:0]=0DH(118us)  Line width in us   118us*(152+17)=20001us=19.942ms      
-//    spiWriteData(0x0A);    // A[3:0]=1010(59us)  Line width in us   59us*(152+43)=20001us=20.001ms      
-  spiWriteCmd(0x3C);       // board  注意：与之前的IC不一样
-//    spiWriteData(0x00);    // GS0-->GS0 LUT0
-//    spiWriteData(0x01);    // GS0-->GS1 LUT1
-//    spiWriteData(0x02);    // GS1-->GS0 LUT2
-    spiWriteData(0x03);    // GS1-->GS1 LUT3  开机第一次刷新Border从白到白
-//    spiWriteData(0xC0);    // VBD-->HiZ  后面刷新时Border都是高阻
-
-  spiWriteCmd(0x11);       // data enter mode
-    spiWriteData(0x01);    // 01 –Y decrement, X increment,
-  spiWriteCmd(0x44);       // set RAM x address start/end, in page 35
-    spiWriteData(0x00);    // RAM x address start at 00h;
-    spiWriteData(0x12);    // RAM x address end at 12h(18+1)*8->152 
-  spiWriteCmd(0x45);       // set RAM y address start/end, in page 35
-    spiWriteData(0x27);    // RAM y address start at 0127h;
-    spiWriteData(0x01);    // RAM y address start at 0127h;
-    spiWriteData(0x00);    // RAM y address end at 00h;
-    spiWriteData(0x00);    // 高位地址=0
-
-  spiWriteCmd(0x2C);     // vcom   注意：与之前的IC不一样 范围：-0.2~-3V
-//    spiWriteData(0x78);    //-3V
-//    spiWriteData(0x64);    //-2.5V
-//    spiWriteData(0x60);    //-2.4V 
-//    spiWriteData(0x58);    //-2.2V 
-    spiWriteData(0x54);    //-2.1V 
-//    spiWriteData(0x50);    //-2V
-//    spiWriteData(0x3C);    //-1.5V
-//    spiWriteData(0x34);    //-1.3V
-//    spiWriteData(0x28);    //-1V 
-//    spiWriteData(0x14);    //-0.5V
-
-  spiWriteCmd(0x37);       // 打开前后两幅图对比模式
-    spiWriteData(0x00);    // 
-    spiWriteData(0x00);    // 
-    spiWriteData(0x00);    // 
-    spiWriteData(0x00);    // 
-    spiWriteData(0x80);    // 
-  writeLut();
-  spiWriteCmd(0x21);       // 不管前一幅画面 Option for Display Update  注意：与之前的IC不一样      
-    //spiWriteData(0x40);    // A[7:4] Red RAM option   A[3:0] BW RAM option  0000:Normal  0100:Bypass RAM content as 0(数据置0)    0101:Bypass RAM content as 1(数据置1)  1000:Inverse RAM content数据0、1互换
-      spiWriteData(0x50);    // A[7:4] Red RAM option   A[3:0] BW RAM option  0000:Normal  0100:Bypass RAM content as 0(数据置0)    0101:Bypass RAM content as 1(数据置1)  1000:Inverse RAM content数据0、1互换
-  spiWriteCmd(0x22);
-    //spiWriteData(0xCB);    // (Enable Clock Signal, Enable CP) (INITIAL DISPLAY,Disable CP,Disable Clock Signal)
-    spiWriteData(0xC7);    // (Enable Clock Signal, Enable CP) (Display update,Disable CP,Disable Clock Signal) 正常更新顺序
-  DIS_IMG(PIC_BLACK);         // INITIAL DISPLAY+全白到全白 清屏，这样可防止开机出现花屏的问题
-
-  spiWriteCmd(0x21);       // Option for Display Update
-    spiWriteData(0x00);    // Normal  后面刷新恢复正常的黑白红显示
-  spiWriteCmd(0x22);
-    spiWriteData(0xC7);    // (Enable Clock Signal, Enable CP) (Display update,Disable CP,Disable Clock Signal) 正常更新顺序
-//    spiWriteData(0xF7);    // (Enable Clock Signal, Enable CP, Load Temperature value, Load LUT) (Display update,Disable CP,Disable Clock Signal)
-  spiWriteCmd(0x3C);       // board
-    spiWriteData(0xC0);    // VBD-->HiZ  后面刷新时Border都是高阻
-}
 
 
 /**
@@ -667,10 +355,94 @@ int32_t main(void)
         delay1ms(500);
     }
     data = 0;
+    EPD_initWft0154cz17(FALSE);
+		// spiInit();
+		// initSsd1675();
+    // Test_Display(0x00);
+    // delay1ms(1000);
+    // Test_Display(0xf0);
+    // delay1ms(1000);
+    // Test_Display(0x55);
+    // delay1ms(1000);
+    // Test_Display(0x00);
+    // delay1ms(1000);
+    // Test_Display(0xff);
+    // delay1ms(1000);
+    delay1ms(10000);
+    // Test_Display(0x66);
+    // delay1ms(15000);
+    // Test_Display(0xff);
+    // delay1ms(5000);
 
-		spiInit();
-		initSsd1675();
-    while(1)
+    // Test_Display2(0xff);
+    // DRAW_initScreen();
+    // DRAW_rectangle(10, 10, 50, 30, 1, 0); // 绘制黑色空心矩形
+    // DRAW_hLine(0, 75, 152, 1);           // 绘制黑色水平线
+    // DRAW_vLine(75, 0, 152, 1);           // 绘制黑色垂直线
+    // DRAW_string(10, 20, "Hello", 0, BLACK);
+    // DRAW_rotatedString(10, 10, "Hello111", 1, BLACK);
+    // DRAW_rotatedString(10, 30, "Hello222", 2, BLACK);
+    // DRAW_rotatedString(10, 60, "Hello333", 3, BLACK);
+
+    // DRAW_string(10, 60, "Hello25", 2, BLACK);
+    // DRAW_string(10, 80, "Hello36", 3, BLACK);
+    // DRAW_char(10, 20, 'H', 1, BLACK);
+    // DRAW_char(10, 40, 'H', 2, BLACK);
+    // DRAW_char(10, 60, 'H', 3, BLACK);
+
+    // DRAW_char(70, 20, 'A', 1, BLACK);
+    // DRAW_char(70, 40, 'A', 2, BLACK);
+    // DRAW_char(70, 60, 'A', 3, BLACK);
+    // DRAW_rotateScreen90();
+    // DRAW_pixel(0, 0, WHITE);
+    // DRAW_pixel(1, 1, WHITE);
+    // DRAW_pixel(2, 2, WHITE);
+    // DRAW_pixel(3, 3, WHITE);
+    // DRAW_pixel(4, 4, WHITE);
+    // DRAW_pixel(10, 10, WHITE);
+    // DRAW_pixel(20, 20, WHITE);
+    // DRAW_pixel(30, 30, WHITE);
+    // DRAW_pixel(40, 40, WHITE);
+    // DRAW_pixel(50, 50, WHITE);
+    // DRAW_pixel(100, 100, WHITE);
+    // DRAW_hLine(10, 10, 50, WHITE);           // 绘制黑色水平线
+    //     I2C_MasterWriteData(&cmd[0],3);
+    //     delay1ms(80);
+    //     I2C_MasterReadData(&u8Recdata[0],7);
+
+
+    //     temperature = temperatureConvert((uint32_t)u8Recdata[3],(uint32_t)u8Recdata[4],(uint32_t)u8Recdata[5]);
+    //     humidity = humidityConvert((uint32_t)u8Recdata[1],(uint32_t)u8Recdata[2],(uint32_t)u8Recdata[3]);
+
+
+    // DRAW_DisplayTempHumiRot(temperature, humidity);
+
+    // DRAW_Char40_Rot(10, 10, '0', BLACK);
+    // DRAW_Char40_Rot(30, 10, '1', BLACK);
+    // DRAW_Char40_Rot(50, 10, '2', BLACK);
+    // DRAW_Char40_Rot(70, 10, '3', BLACK);
+    // DRAW_Char40_Rot(90, 10, '4', BLACK);
+    // DRAW_Char40_Rot(10, 60, '5', BLACK);
+    // DRAW_Char40_Rot(30, 60, '6', BLACK);
+    // DRAW_Char40_Rot(50, 60, '7', BLACK);
+    // DRAW_Char40_Rot(70, 60, '8', BLACK);
+    // DRAW_Char40_Rot(90, 60, '9', BLACK);
+
+
+    // DRAW_Char40_Rot(10, 10, '.', BLACK);
+    // DRAW_Char40_Rot(30, 10, '°', BLACK);
+    // DRAW_Char40_Rot(50, 10, '%', BLACK);
+    // DRAW_Char40_Rot(10, 60, ':', BLACK);
+    // DRAW_Char40_Rot(30, 60, '-', BLACK);
+    // DRAW_Char40_Rot(50, 60, 'C', BLACK);
+
+    // DRAW_outputScreen();
+
+    // delay1ms(10000);
+
+    // EPD_poweroff();
+
+    while(data != 0x39)
     {
         I2C_MasterWriteData(&cmd[0],3);
         delay1ms(80);
@@ -692,6 +464,13 @@ int32_t main(void)
         // uartPrintf("D4 = %x !!\n",u8Recdata[4]);
         // uartPrintf("D5 = %x !!\n",u8Recdata[5]);
         uartPrintf("D6 = %x !!\n",u8Recdata[6]);
+        DRAW_initScreen();
+        DRAW_DisplayTempHumiRot(temperature, humidity);
+        DRAW_outputScreen();
+        data = Uart_ReceiveData(UARTCH1);
+        uartPrintf("Input 9 to exit.\n");
+
+        delay1ms(10000);
 
         // data = Uart_ReceiveData(UARTCH1);
         // if (data != 0)
@@ -700,8 +479,10 @@ int32_t main(void)
         //     data = 0;
         // }
 
-        delay1ms(1000);
     }
+    EPD_poweroff();
+    while(1)
+    {}
 
 }
 
