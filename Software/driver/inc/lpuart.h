@@ -130,18 +130,18 @@ typedef enum en_lpuart_multimode
  ******************************************************************************/
 typedef enum en_lpuart_mmdorck
 {
-    Data = 0u, ///<多主机模式时，数据帧TB8标记
-    Addr  = 1u, ///<多主机模式时，地址帧TB8标记 
+    lpData = 0u, ///<多主机模式时，数据帧TB8标记
+    lpAddr  = 1u, ///<多主机模式时，地址帧TB8标记 
 }en_lpuart_mmdorck_t;
 /**
  ******************************************************************************
  ** \brief lpuart奇偶校验
  ******************************************************************************/
-typedef enum en_uart_check
+typedef enum en_lpuart_check
 {
-    Even = 0u, ///<偶校验
-    Odd  = 1u, ///<奇校验
-}en_uart_check_t;
+    lpEven = 0u, ///<偶校验
+    lpOdd  = 1u, ///<奇校验
+}en_lpuart_check_t;
 /**
  ******************************************************************************
  ** \brief lpuart 的工作模式及从机地址及地址掩码
@@ -276,9 +276,9 @@ en_result_t LPUart_SetMode(stc_lpuart_mode_t* pstcMode);
 en_result_t LPUart_SetMultiMode(stc_lpuart_multimode_t* pstcMultiConfig);
 boolean_t LPUart_GetRb8(void);
 //设置TB8
-en_result_t LPUart_SetTb8(en_uart_check_t enCheck,uint8_t u8Data);
+en_result_t LPUart_SetTb8(en_lpuart_check_t enCheck,uint8_t u8Data);
 
-en_result_t LPUart_CheckEvenOrOdd(en_uart_check_t enCheck,uint8_t u8Recv);
+en_result_t LPUart_CheckEvenOrOdd(en_lpuart_check_t enCheck,uint8_t u8Recv);
 
 //多主机模式的从机地址及地址掩码设置
 en_result_t LPUart_SetMMDOrCk(en_lpuart_mmdorck_t enTb8);

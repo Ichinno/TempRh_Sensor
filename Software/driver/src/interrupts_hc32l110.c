@@ -55,6 +55,7 @@
  ******************************************************************************/
 #include "ddl.h"
 #include "interrupts_hc32l110.h"
+
 __WEAKDEF void Gpio_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Uart_IRQHandler(uint8_t u8Param);
 __WEAKDEF void LpUart_IRQHandler(uint8_t u8Param);
@@ -72,6 +73,7 @@ __WEAKDEF void Lvd_IRQHandler(uint8_t u8Param);
 __WEAKDEF void EfRam_IRQHandler(uint8_t u8Param);
 __WEAKDEF void ClkTrim_IRQHandler(uint8_t u8Param);
 
+void Bt0Int(void);
 /**
  *******************************************************************************
  ** \brief NVIC 中断使能
@@ -220,7 +222,8 @@ void I2C_IRQHandler(void)
  ******************************************************************************/
 void TIM0_IRQHandler(void)
 {
-    Tim_IRQHandler(0);
+    // Tim_IRQHandler(0);
+    Bt0Int();
 }
 
 /**
