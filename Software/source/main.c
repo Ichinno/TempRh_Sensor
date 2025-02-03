@@ -39,6 +39,8 @@
 #include "queue.h"
 #include "uart_interface.h"
 #include "e104.h"
+#include "image.h"
+
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                            
  ******************************************************************************/
@@ -310,7 +312,7 @@ static void timInit(void)
 int32_t main(void)
 {
    uint8_t data = 0;
-   uint8_t crc = 0;
+//   uint8_t crc = 0;
 //    boolean_t trig1s = FALSE;
    float temperature = 0.0, humidity = 0.0;
     UARTIF_uartInit();
@@ -323,12 +325,12 @@ int32_t main(void)
         data = Uart_ReceiveData(UARTCH1);
         delay1ms(500);
     }
-    E104_ioInit();
-    timInit();
+    // E104_ioInit();
+    // timInit();
 
     data = 0;
-    // EPD_initWft0154cz17(TRUE);
-    // delay1ms(10000);
+    EPD_initWft0154cz17(TRUE);
+    // delay1ms(5000);
 
     // uartPrintf(2, "0");
 //    LPUart_SendData(0x00);
@@ -342,9 +344,9 @@ int32_t main(void)
     //     data = LPUart_ReceiveData();
     // }
 
-    
-    // while(data != 0)
-    // {
+
+    while(data != 0x39)
+    {
         
     //     uartPrintf(0, "Receive data is %c.\n",data);
     //     data = LPUart_ReceiveData();
@@ -352,42 +354,43 @@ int32_t main(void)
 
     // while(data != 0x39)
     // {
-    //     I2C_MasterWriteData(&cmd[0],3);
-    //     delay1ms(80);
-    //     I2C_MasterReadData(&u8Recdata[0],7);
+        I2C_MasterWriteData(&cmd[0],3);
+        delay1ms(80);
+        I2C_MasterReadData(&u8Recdata[0],7);
 
-    //     temperature = temperatureConvert((uint32_t)u8Recdata[3],(uint32_t)u8Recdata[4],(uint32_t)u8Recdata[5]);
-    //     humidity = humidityConvert((uint32_t)u8Recdata[1],(uint32_t)u8Recdata[2],(uint32_t)u8Recdata[3]);
+        temperature = temperatureConvert((uint32_t)u8Recdata[3],(uint32_t)u8Recdata[4],(uint32_t)u8Recdata[5]);
+        humidity = humidityConvert((uint32_t)u8Recdata[1],(uint32_t)u8Recdata[2],(uint32_t)u8Recdata[3]);
 
-    //     uartPrintfFloat("Temperature is ",temperature);
-    //     uartPrintfFloat("Humidity is ",humidity);
+        UARTIF_uartPrintfFloat("Temperature is ",temperature);
+        UARTIF_uartPrintfFloat("Humidity is ",humidity);
     //     crc = calcCrc8(&u8Recdata[0],6);
     //     uartPrintf(0, "CRC = %x !!\n",crc);
     //     uartPrintf(0, "D0 = %x !!\n",u8Recdata[0]);
     //     uartPrintf(0, "D6 = %x !!\n",u8Recdata[6]);
 
-        // DRAW_initScreen();
-        // DRAW_DisplayTempHumiRot(temperature, humidity);
-        // DRAW_outputScreen();
+        DRAW_initScreen();
+        DRAW_DisplayTempHumiRot(temperature,humidity);
 
-        // data = Uart_ReceiveData(UARTCH1);
-        // uartPrintf("Input 9 to exit.\n");
-        // delay1ms(1000);
+        DRAW_outputScreen();
 
-    // }
-    // EPD_poweroff();
-    while(1)
-    {
-        if (tg1) // 10ms
-        {
-            tg1 = FALSE;
-            UARTIF_passThrough();
-            (void)E104_getLinkState();
-            (void)E104_getDataState();
-            E104_executeCommand();
+        data = Uart_ReceiveData(UARTCH1);
+        UARTIF_uartPrintf(0,"Input 9 to exit.\n");
+        delay1ms(8000);
 
-        }
     }
+    EPD_poweroff();
+//     while(1)
+//     {
+//         if (tg1) // 10ms
+//         {
+//             tg1 = FALSE;
+//             UARTIF_passThrough();
+//             (void)E104_getLinkState();
+//             (void)E104_getDataState();
+//             E104_executeCommand();
+
+//         }
+//     }
 }
 
 /******************************************************************************

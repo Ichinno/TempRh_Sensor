@@ -51,6 +51,9 @@ void DRAW_rotatedChar(int x, int y, char c, int fontSize, int color);
 void DRAW_DisplayTempHumiRot(float temperature, float humidity);
 void DRAW_Char40_Rot(int x, int y, char c, int color);
 void DRAW_DisplayTempHumiRot(float temperature, float humidity);
+// void DRAW_CharZ(int x, int y, char c, int width, int height, const unsigned char *fontData, int fontSize, int color);
+// void DRAW_StringZ(int x, int y, const char *str, int width, int height, const unsigned char *fontData, int fontSize, int color);
+void DRAW_Image(int x, int y, const unsigned char *imageData, int width, int height, int scale, int invertColor, int rotate90);
 
 
 #endif // SCREEN_H
