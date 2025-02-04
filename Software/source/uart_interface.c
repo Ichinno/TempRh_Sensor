@@ -141,7 +141,7 @@ void UARTIF_uartPrintfFloat(const char *head, const float data)
 {
    uint8_t integerPart = (uint8_t)data;
    float decimalPart = data * 10000 - integerPart * 10000;
-   UARTIF_uartPrintf(0, "%s%d.%d !!\n",head,integerPart,(uint16_t)decimalPart);
+   UARTIF_uartPrintf(2, "%s%d.%d !!\n",head,integerPart,(uint16_t)decimalPart);
 }
 
 
@@ -196,8 +196,8 @@ void UARTIF_uartInit(void)
     Bt_Run(TIM1);
 
     Uart_Init(UARTCH1, &stcConfig);
-    Uart_EnableIrq(UARTCH1,UartRxIrq);
-    Uart_ClrStatus(UARTCH1,UartRxFull);
+    // Uart_EnableIrq(UARTCH1,UartRxIrq);
+    // Uart_ClrStatus(UARTCH1,UartRxFull);
     Uart_EnableFunc(UARTCH1,UartRx);
 
     Queue_Init(&uartRecdata);
@@ -269,8 +269,8 @@ void UARTIF_lpuartInit(void)
    Bt_Cnt16Set(TIM2,u16timer);
    Bt_Run(TIM2);
 
-   LPUart_EnableFunc(LPUartRx);
-   LPUart_EnableIrq(LPUartRxIrq);
+//    LPUart_EnableFunc(LPUartRx);
+//    LPUart_EnableIrq(LPUartRxIrq);
    LPUart_ClrStatus(LPUartRxFull);
 }
 

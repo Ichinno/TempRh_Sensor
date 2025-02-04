@@ -641,7 +641,7 @@ void DRAW_Image(int x, int y, const unsigned char *imageData, int width, int hei
     }
 }
 
-void DRAW_DisplayTempHumiRot(float temperature, float humidity)
+void DRAW_DisplayTempHumiRot(float temperature, float humidity, boolean_t linkFlag)
 {
 
     uint8_t baseX = 00;
@@ -763,6 +763,11 @@ void DRAW_DisplayTempHumiRot(float temperature, float humidity)
 
     DRAW_Image(2, 78, FONT_24PX_SHI, 24, 23,1,1,1);
     DRAW_Image(32, 78, FONT_24PX_DU, 24, 23,1,1,1);
+
+    if (linkFlag)
+    {
+        DRAW_Image(120, 2, FONT_24PX_BTLOGO, 24, 22,1,1,1);
+    }
 
 }
 

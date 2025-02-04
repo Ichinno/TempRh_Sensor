@@ -25,6 +25,8 @@
 #include "gpio.h"
 #include "spi.h"
 #include "epd.h"
+#include "uart_interface.h"
+
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                            
  ******************************************************************************/
@@ -295,7 +297,7 @@ void EPD_initWft0154cz17(boolean_t isfull)
         WRITE_LUT(0x24, lut_bb_WFT0290CZ10,42);
     }
     spiWriteCmd(0x04);
-    delay1ms(2000);
+    // delay1ms(2000);
 
     // spiWriteCmd(0x13);
     // delay1ms(2);
@@ -317,6 +319,14 @@ void EPD_initWft0154cz17(boolean_t isfull)
     // DC_L;
     // delay1ms(2);
     // spiWriteCmd(0x12);
+    // if (isfull)
+    // {
+    //     UARTIF_uartPrintf(0, "full update.\n");
+    // }
+    // else
+    // {
+    //     UARTIF_uartPrintf(0, "part update.\n");
+    // }
 }
 
 void EPD_poweroff(void)

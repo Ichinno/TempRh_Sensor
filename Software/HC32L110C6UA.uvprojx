@@ -581,6 +581,16 @@
               <FileType>1</FileType>
               <FilePath>.\driver\src\spi.c</FilePath>
             </File>
+            <File>
+              <FileName>lpm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\src\lpm.c</FilePath>
+            </File>
+            <File>
+              <FileName>lpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\driver\src\lpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

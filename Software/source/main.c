@@ -40,6 +40,8 @@
 #include "uart_interface.h"
 #include "e104.h"
 #include "image.h"
+#include "lpt.h"
+#include "lpm.h"
 
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                            
@@ -63,6 +65,11 @@
 // static uint8_t uart1RxFlg = 0;
 static volatile uint16_t timer0 = 0;
 static volatile boolean_t tg1 = FALSE;
+static volatile boolean_t wakeup = FALSE;
+static volatile boolean_t tg8s = FALSE;
+// static volatile boolean_t tg2s = FALSE;
+static float temperature = 0.0, humidity = 0.0;
+static boolean_t linkFlag = FALSE;
 
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                             
@@ -97,6 +104,23 @@ void Bt0Int(void)
     }
 }
 
+void LptInt(void)
+{
+    if (TRUE == Lpt_GetIntFlag())
+    {
+        Lpt_ClearIntFlag();
+        wakeup = TRUE;
+        if (timer0 < 4)  // 10s
+        {
+            timer0++;
+        }
+        else
+        {
+            timer0 = 0;
+            tg8s = TRUE;
+        }
+    }
+}
 
 
 /**********************************************************
@@ -273,9 +297,6 @@ static float humidityConvert(uint32_t d0, uint32_t d1, uint32_t d2)
 static void timInit(void)
 {
     stc_bt_config_t   stcConfig;
-    en_result_t       enResult = Error;
-    // uint16_t          u16ArrData = 0xC567;
-    // uint16_t          u16InitCntData = 0xC567;
     
     stcConfig.pfnTim1Cb = NULL;
         
@@ -288,7 +309,7 @@ static void timInit(void)
     //Bt初始化
     Bt_Stop(TIM0);
 
-    enResult = Bt_Init(TIM0, &stcConfig);
+    Bt_Init(TIM0, &stcConfig);
     
     //TIM1中断使能
     Bt_ClearIntFlag(TIM0);
@@ -302,6 +323,155 @@ static void timInit(void)
 
 }
 
+static void lpmInit(void)
+{
+    stc_lpt_config_t stcConfig;
+    stc_lpm_config_t stcLpmCfg;
+    uint16_t         u16ArrData = 0;
+
+    Clk_Enable(ClkRCL, TRUE);
+    //使能Lpt、GPIO外设时钟
+    Clk_SetPeripheralGate(ClkPeripheralLpTim, TRUE);
+
+    stcConfig.enGateP  = LptPositive;
+    stcConfig.enGate   = LptGateDisable;
+    stcConfig.enTckSel = LptIRC32K;
+    stcConfig.enTog    = LptTogDisable;
+    stcConfig.enCT     = LptTimer;
+    stcConfig.enMD     = LptMode2;
+    
+    stcConfig.pfnLpTimCb = LptInt;
+    Lpt_Init(&stcConfig);
+    //Lpm Cfg
+    stcLpmCfg.enSEVONPEND   = SevPndDisable;
+    stcLpmCfg.enSLEEPDEEP   = SlpDpEnable;
+    stcLpmCfg.enSLEEPONEXIT = SlpExtDisable;
+    Lpm_Config(&stcLpmCfg);
+    
+    //Lpt 中断使能
+    Lpt_ClearIntFlag();
+    Lpt_EnableIrq();
+    EnableNvic(LPTIM_IRQn, 0, TRUE);
+    
+    
+    //设置重载值，计数初值，启动计数
+    Lpt_ARRSet(u16ArrData);
+    Lpt_Run();
+
+    // 进入低功耗模式……
+    Lpm_GotoLpmMode(); 
+
+}
+
+static void task3(void)
+{
+    if (tg1) // 10ms
+    {
+        tg1 = FALSE;
+        UARTIF_passThrough();
+        (void)E104_getLinkState();
+        (void)E104_getDataState();
+        E104_executeCommand();
+    }
+}
+
+static void task1(void)
+{
+    DRAW_initScreen();
+    DRAW_DisplayTempHumiRot(temperature,humidity,linkFlag);
+
+    DRAW_outputScreen();
+}
+
+static void task0(void)
+{
+    I2C_MasterWriteData(&cmd[0],3);
+    delay1ms(80);
+    I2C_MasterReadData(&u8Recdata[0],7);
+
+    temperature = temperatureConvert((uint32_t)u8Recdata[3],(uint32_t)u8Recdata[4],(uint32_t)u8Recdata[5]);
+    humidity = humidityConvert((uint32_t)u8Recdata[1],(uint32_t)u8Recdata[2],(uint32_t)u8Recdata[3]);
+    if (E104_getLinkState())
+    {
+        UARTIF_uartPrintfFloat("Temperature is ",temperature);
+        UARTIF_uartPrintfFloat("Humidity is ",humidity);
+        if (!linkFlag)
+        {
+            linkFlag = TRUE;
+        }
+    }
+    else
+    {
+        if (linkFlag)
+        {
+            linkFlag = FALSE;
+            E104_setWakeUpMode();
+
+            delay1ms(30);
+            E104_setSleepMode();
+        }
+
+    }
+}
+
+static void handleClearEpdEvent(void)
+{
+    typedef enum 
+    {
+        STATE_IDLE,     // 空闲状态
+        STATE_WAITING_3_4,  // 等待第三次唤醒
+        STATE_WAITING_4,  // 等待第四次唤醒
+    } State;
+
+    static State currentState = STATE_IDLE;
+    static uint8_t counter = 0;
+    // static boolean_t firstflag = TRUE;
+
+    switch (currentState)
+    {
+        case STATE_IDLE:
+            if (counter > 40 && tg8s)
+            {
+                currentState = STATE_WAITING_3_4;
+                counter = 0;
+            }
+            else
+            {
+                counter++; 
+            }
+            break;
+        case STATE_WAITING_3_4:
+            if (counter < 2)
+            {
+                counter++;
+            }
+            else
+            {
+                EPD_poweroff();
+                delay1ms(10);
+                EPD_initWft0154cz17(TRUE);
+                currentState = STATE_WAITING_4;
+                counter = 0;
+            }
+            break;
+        case STATE_WAITING_4:
+            if (counter < 3)
+            {
+                counter++;
+            }
+            else
+            {
+                EPD_initWft0154cz17(FALSE);
+                currentState = STATE_IDLE;
+                counter = 0;
+            }
+            break;
+        default:
+            break;
+    }
+    // UARTIF_uartPrintf(0, "State is %d, counter is %d.\n",currentState,counter);
+}
+
 /**
  ******************************************************************************
  ** \brief  Main function of project
@@ -311,86 +481,45 @@ static void timInit(void)
  ******************************************************************************/
 int32_t main(void)
 {
-   uint8_t data = 0;
+//    uint8_t data = 0;
 //   uint8_t crc = 0;
 //    boolean_t trig1s = FALSE;
-   float temperature = 0.0, humidity = 0.0;
     UARTIF_uartInit();
     i2cInit();
     UARTIF_lpuartInit();
+    E104_ioInit();
+    delay1ms(30);
+    E104_setSleepMode();
 
-    while (data != 0x36)
-    {
-        UARTIF_uartPrintf(0, "Input 6 to start.\n");
-        data = Uart_ReceiveData(UARTCH1);
-        delay1ms(500);
-    }
-    // E104_ioInit();
+    // while (data != 0x36)
+    // {
+    //     UARTIF_uartPrintf(0, "Input 6 to start.\n");
+    //     data = Uart_ReceiveData(UARTCH1);
+    //     delay1ms(500);
+    // }
     // timInit();
-
-    data = 0;
     EPD_initWft0154cz17(TRUE);
-    // delay1ms(5000);
+    task0();
+    task1();
+    lpmInit();
 
-    // uartPrintf(2, "0");
-//    LPUart_SendData(0x00);
-//    delay1ms(2);
-
-    // while (data == 0)
-    // {
-    //     uartPrintf(2, "AT");
-    //     uartPrintf(0, "Sent AT to E104-BT01, now try to get receive data.\n");
-    //     delay1ms(10);
-    //     data = LPUart_ReceiveData();
-    // }
-
-
-    while(data != 0x39)
+    while(1)
     {
-        
-    //     uartPrintf(0, "Receive data is %c.\n",data);
-    //     data = LPUart_ReceiveData();
-    // }
-
-    // while(data != 0x39)
-    // {
-        I2C_MasterWriteData(&cmd[0],3);
-        delay1ms(80);
-        I2C_MasterReadData(&u8Recdata[0],7);
-
-        temperature = temperatureConvert((uint32_t)u8Recdata[3],(uint32_t)u8Recdata[4],(uint32_t)u8Recdata[5]);
-        humidity = humidityConvert((uint32_t)u8Recdata[1],(uint32_t)u8Recdata[2],(uint32_t)u8Recdata[3]);
-
-        UARTIF_uartPrintfFloat("Temperature is ",temperature);
-        UARTIF_uartPrintfFloat("Humidity is ",humidity);
-    //     crc = calcCrc8(&u8Recdata[0],6);
-    //     uartPrintf(0, "CRC = %x !!\n",crc);
-    //     uartPrintf(0, "D0 = %x !!\n",u8Recdata[0]);
-    //     uartPrintf(0, "D6 = %x !!\n",u8Recdata[6]);
-
-        DRAW_initScreen();
-        DRAW_DisplayTempHumiRot(temperature,humidity);
-
-        DRAW_outputScreen();
-
-        data = Uart_ReceiveData(UARTCH1);
-        UARTIF_uartPrintf(0,"Input 9 to exit.\n");
-        delay1ms(8000);
-
+        if (wakeup)
+        {
+            wakeup = FALSE;
+            task0();
+            // UARTIF_uartPrintf(0, "Wake up! \n");
+            // handleClearEpdEvent();
+            if (tg8s)
+            {
+                tg8s = FALSE;
+                task1();
+                // UARTIF_uartPrintf(0, "tg8s! \n");
+            }
+            Lpm_GotoLpmMode(); 
+        }
     }
-    EPD_poweroff();
-//     while(1)
-//     {
-//         if (tg1) // 10ms
-//         {
-//             tg1 = FALSE;
-//             UARTIF_passThrough();
-//             (void)E104_getLinkState();
-//             (void)E104_getDataState();
-//             E104_executeCommand();
-
-//         }
-//     }
 }
 
 /******************************************************************************

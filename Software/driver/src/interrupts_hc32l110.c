@@ -74,6 +74,8 @@ __WEAKDEF void EfRam_IRQHandler(uint8_t u8Param);
 __WEAKDEF void ClkTrim_IRQHandler(uint8_t u8Param);
 
 void Bt0Int(void);
+void LptInt(void);
+
 /**
  *******************************************************************************
  ** \brief NVIC 中断使能
@@ -256,7 +258,8 @@ void TIM2_IRQHandler(void)
  ******************************************************************************/
 void LPTIM_IRQHandler(void)
 {
-    LpTim_IRQHandler(0);
+    // LpTim_IRQHandler(0);
+    LptInt();
 }
 
 /**
