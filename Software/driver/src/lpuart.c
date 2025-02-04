@@ -305,7 +305,7 @@ boolean_t LPUart_GetRb8(void)
  **
  ** \retval 个数
  ******************************************************************************/
-en_result_t LPUart_SetTb8(en_uart_check_t enCheck,uint8_t u8Data)
+en_result_t LPUart_SetTb8(en_lpuart_check_t enCheck,uint8_t u8Data)
 {
 	uint8_t cnt=0,i;	
 	for(i=0;i<8;i++)
@@ -316,7 +316,7 @@ en_result_t LPUart_SetTb8(en_uart_check_t enCheck,uint8_t u8Data)
 		}
 		u8Data<<=1;
 	}
-	if(enCheck == Even)
+	if(enCheck == lpEven)
 	{
 		if(cnt%2!=0)
 		{
@@ -348,7 +348,7 @@ en_result_t LPUart_SetTb8(en_uart_check_t enCheck,uint8_t u8Data)
  **
  ** \retval Error或者成功Ok
  ******************************************************************************/
-en_result_t LPUart_CheckEvenOrOdd(en_uart_check_t enCheck,uint8_t u8Recv)
+en_result_t LPUart_CheckEvenOrOdd(en_lpuart_check_t enCheck,uint8_t u8Recv)
 {
 	uint8_t cnt=0,i;
 
@@ -360,7 +360,7 @@ en_result_t LPUart_CheckEvenOrOdd(en_uart_check_t enCheck,uint8_t u8Recv)
 		}
 		u8Recv<<=1;
 	}
-	if(enCheck == Even)
+	if(enCheck == lpEven)
 	{
 		if(cnt%2!=0)
 		{

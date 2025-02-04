@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像取模工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+        }
+        label, input, button {
+            margin: 10px 0;
+            display: block;
+        }
+        .preview-container {
+            max-height: 400px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .preview {
+            display: grid;
+            gap: 1px;
+            background-color: #ccc;
+        }
+        .preview button {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            background-color: #fff;
+        }
+        .preview button.black {
+            background-color: #000;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .controls button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图像取模工具</h1>
+        <label for="imageInput">上传图像：</label>
+        <input type="file" id="imageInput" accept="image/*">
+        
+        <label for="widthInput">点阵图宽度：</label>
+        <input type="number" id="widthInput" placeholder="输入宽度（像素）" value="24">
+        
+        <label for="heightInput">点阵图高度：</label>
+        <input type="number" id="heightInput" placeholder="输入高度（像素）" value="20">
+        
+        <label for="stepInput">平移步长（像素）：</label>
+        <input type="number" id="stepInput" placeholder="输入平移步长" value="5">
+        
+        <div class="controls">
+            <button onclick="zoomIn()">放大</button>
+            <button onclick="zoomOut()">缩小</button>
+            <button onclick="moveUp()">上</button>
+            <button onclick="moveDown()">下</button>
+            <button onclick="moveLeft()">左</button>
+            <button onclick="moveRight()">右</button>
+        </div>
+        
+        <button onclick="generateMatrix()">生成点阵图</button>
+        
+        <h2>图像编辑框：</h2>
+        <canvas id="editCanvas"></canvas>
+        
+        <h2>点阵图预览：</h2>
+        <div class="preview-container">
+            <div id="preview" class="preview"></div>
+        </div>
+        
+        <h2>输出点阵图（C语言数组）：</h2>
+        <textarea id="output" readonly></textarea>
+    </div>
+
+    <script>
+        const editCanvas = document.getElementById('editCanvas');
+        const editCtx = editCanvas.getContext('2d');
+        const preview = document.getElementById('preview');
+        const output = document.getElementById('output');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const stepInput = document.getElementById('stepInput');
+
+        let img = new Image();
+        let scale = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        let isDragging = false;
+        let startX, startY;
+        let matrix = []; // 存储点阵图数据
+
+        // 初始化画布
+        function initCanvas() {
+            const width = parseInt(widthInput.value);
+            const height = parseInt(heightInput.value);
+            editCanvas.width = width;
+            editCanvas.height = height;
+            editCanvas.style.cursor = 'grab';
+        }
+
+        // 绘制图像到编辑画布
+        function drawImage() {
+            editCtx.clearRect(0, 0, editCanvas.width, editCanvas.height);
+            editCtx.fillStyle = '#fff'; // 填充白色背景
+            editCtx.fillRect(0, 0, editCanvas.width, editCanvas.height);
+            editCtx.save();
+            editCtx.translate(offsetX, offsetY);
+            editCtx.scale(scale, scale);
+            editCtx.drawImage(img, 0, 0);
+            editCtx.restore();
+        }
+
+        // 居中显示图像
+        function centerImage() {
+            const width = editCanvas.width;
+            const height = editCanvas.height;
+            offsetX = (width - img.width * scale) / 2;
+            offsetY = (height - img.height * scale) / 2;
+            drawImage();
+        }
+
+        // 处理图像上传
+        document.getElementById('imageInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                img.onload = function () {
+                    initCanvas();
+                    centerImage();
+                };
+            }
+        });
+
+        // 鼠标拖动图像
+        editCanvas.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            startX = e.offsetX - offsetX;
+            startY = e.offsetY - offsetY;
+            editCanvas.style.cursor = 'grabbing';
+        });
+
+        editCanvas.addEventListener('mousemove', function (e) {
+            if (isDragging) {
+                offsetX = e.offsetX - startX;
+                offsetY = e.offsetY - startY;
+                drawImage();
+            }
+        });
+
+        editCanvas.addEventListener('mouseup', function () {
+            isDragging = false;
+            editCanvas.style.cursor = 'grab';
+        });
+
+        editCanvas.addEventListener('mouseleave', function () {
+            isDragging = false;
+            editCanvas.style.cursor = 'grab';
+        });
+
+        // 鼠标滚轮缩放图像
+        editCanvas.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            const scaleFactor = 1.1;
+            if (e.deltaY < 0) {
+                scale *= scaleFactor;
+            } else {
+                scale /= scaleFactor;
+            }
+            drawImage();
+        });
+
+        // 缩放按钮
+        function zoomIn() {
+            scale *= 1.1;
+            drawImage();
+        }
+
+        function zoomOut() {
+            scale /= 1.1;
+            drawImage();
+        }
+
+        // 平移按钮
+        function moveUp() {
+            const step = parseInt(stepInput.value);
+            offsetY += step;
+            drawImage();
+        }
+
+        function moveDown() {
+            const step = parseInt(stepInput.value);
+            offsetY -= step;
+            drawImage();
+        }
+
+        function moveLeft() {
+            const step = parseInt(stepInput.value);
+            offsetX += step;
+            drawImage();
+        }
+
+        function moveRight() {
+            const step = parseInt(stepInput.value);
+            offsetX -= step;
+            drawImage();
+        }
+
+        // 生成点阵图
+        function generateMatrix() {
+            const width = parseInt(widthInput.value);
+            const height = parseInt(heightInput.value);
+
+            // 更新编辑框尺寸
+            editCanvas.width = width;
+            editCanvas.height = height;
+            drawImage();
+
+            // 获取编辑框中的图像数据
+            const imageData = editCtx.getImageData(0, 0, width, height);
+            const data = imageData.data;
+            matrix = []; // 重置点阵图数据
+
+            // 清空预览框
+            preview.innerHTML = '';
+            preview.style.gridTemplateColumns = `repeat(${width}, 10px)`;
+            preview.style.gridTemplateRows = `repeat(${height}, 10px)`;
+
+            for (let y = 0; y < height; y++) {
+                matrix[y] = [];
+                for (let x = 0; x < width; x++) {
+                    const index = (y * width + x) * 4;
+                    const r = data[index];
+                    const g = data[index + 1];
+                    const b = data[index + 2];
+                    const a = data[index + 3]; // 透明度
+                    const gray = (r + g + b) / 3; // 计算灰度值
+
+                    // 二值化：灰度大于 128 或透明度为 0 为白色（0），否则为黑色（1）
+                    const isBlack = gray <= 128 && a > 0;
+                    matrix[y][x] = isBlack ? 1 : 0;
+
+                    // 创建按钮
+                    const button = document.createElement('button');
+                    button.classList.toggle('black', isBlack);
+                    button.addEventListener('click', () => togglePixel(x, y));
+                    preview.appendChild(button);
+                }
+            }
+
+            // 更新点阵图文本
+            updateOutput();
+        }
+
+        // 切换像素状态
+        function togglePixel(x, y) {
+            matrix[y][x] = matrix[y][x] ? 0 : 1; // 切换黑白状态
+            const button = preview.children[y * editCanvas.width + x];
+            button.classList.toggle('black');
+            updateOutput();
+        }
+
+        // 更新点阵图文本
+        function updateOutput() {
+            const width = editCanvas.width;
+            const height = editCanvas.height;
+            let result = `// 点阵图尺寸：${width} x ${height}\n`;
+            result += `// 数组大小：${Math.ceil(width / 8) * height} 字节\n`;
+            result += 'const uint8_t bitmap[] = {\n';
+
+            for (let y = 0; y < height; y++) {
+                let byte = 0;
+                let bitCount = 0;
+                let rowBytes = [];
+
+                for (let x = 0; x < width; x++) {
+                    byte = (byte << 1) | matrix[y][x]; // 将像素值拼接到byte中
+                    bitCount++;
+
+                    // 每8个bit组成一个byte
+                    if (bitCount === 8) {
+                        rowBytes.push(`0x${byte.toString(16).padStart(2, '0')}`);
+                        byte = 0;
+                        bitCount = 0;
+                    }
+                }
+
+                // 如果一行不足8个bit，补齐到8个bit
+                if (bitCount > 0) {
+                    byte = byte << (8 - bitCount); // 左移补齐
+                    rowBytes.push(`0x${byte.toString(16).padStart(2, '0')}`);
+                }
+
+                result += `    ${rowBytes.join(', ')},\n`;
+            }
+
+            result += '};';
+            output.value = result;
+        }
+    </script>
+</body>
+</html>

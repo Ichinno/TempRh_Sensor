@@ -25,6 +25,8 @@
 #include "gpio.h"
 #include "spi.h"
 #include "epd.h"
+#include "uart_interface.h"
+
 /******************************************************************************
  * Local pre-processor symbols/macros ('#define')                            
  ******************************************************************************/
@@ -240,7 +242,7 @@ static void spiInit(void)
 
 void EPD_initWft0154cz17(boolean_t isfull)
 {
-    int i = 0,j = 0;
+//    int i = 0,j = 0;
 
     spiInit();
     resetWft0154cz17();                      // 电子纸控制器复位
@@ -295,151 +297,37 @@ void EPD_initWft0154cz17(boolean_t isfull)
         WRITE_LUT(0x24, lut_bb_WFT0290CZ10,42);
     }
     spiWriteCmd(0x04);
-    delay1ms(2000);
+    // delay1ms(2000);
 
-    spiWriteCmd(0x13);
-    delay1ms(2);
+    // spiWriteCmd(0x13);
+    // delay1ms(2);
 
-    DC_H;
-    Spi_SetCS(TRUE);
-    Spi_SetCS(FALSE);
-    // Spi_SendData(data);
+    // DC_H;
+    // Spi_SetCS(TRUE);
+    // Spi_SetCS(FALSE);
+    // // Spi_SendData(data);
 
-    for (i = 0; i < 152; i++)
-    {
-        for (j = 0; j < 19; j++)
-        {
-            Spi_SendData(0xff);
-        }
-    }
+    // for (i = 0; i < 152; i++)
+    // {
+    //     for (j = 0; j < 19; j++)
+    //     {
+    //         Spi_SendData(0xff);
+    //     }
+    // }
 
-    Spi_SetCS(TRUE);
-    DC_L;
-    delay1ms(2);
-    spiWriteCmd(0x12);
+    // Spi_SetCS(TRUE);
+    // DC_L;
+    // delay1ms(2);
+    // spiWriteCmd(0x12);
+    // if (isfull)
+    // {
+    //     UARTIF_uartPrintf(0, "full update.\n");
+    // }
+    // else
+    // {
+    //     UARTIF_uartPrintf(0, "part update.\n");
+    // }
 }
-
-void Test_Display(unsigned char data)
-{
-    int i = 0,j = 0;
-    spiWriteCmd(0x13);
-    delay1ms(2);
-
-    DC_H;
-    Spi_SetCS(TRUE);
-    Spi_SetCS(FALSE);
-    for (i = 0; i < 152; i++)
-    {
-        for (j = 0; j < 19; j++)
-        {
-            Spi_SendData(data);
-        }
-    }
-
-    Spi_SetCS(TRUE);
-    DC_L;
-    delay1ms(2);
-
-    spiWriteCmd(0x12);
-} 
-
-void Test_Display2(unsigned char data)
-{
-    int i = 0,j = 0;
-//    unsigned char counter = 0;
-    spiWriteCmd(0x13);
-    delay1ms(2);
-
-    DC_H;
-    Spi_SetCS(TRUE);
-    Spi_SetCS(FALSE);
-
-    for (i = 0; i < 130; i++)
-    {
-        for (j = 0; j < 19; j++)
-        {
-            Spi_SendData(data);
-        }
-    }
-
-    for (; i < 152; i++)
-    {
-
-            Spi_SendData(0x01);
-            Spi_SendData(0x03);
-            Spi_SendData(0x07);
-            Spi_SendData(0x0f);
-            Spi_SendData(0x1f);
-            Spi_SendData(0x3f);
-            Spi_SendData(0x7f);
-            Spi_SendData(0xff);
-
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-            Spi_SendData(0xff);
-    }
-            // Spi_SendData(0x01);
-            // Spi_SendData(0x03);
-            // Spi_SendData(0x07);
-            // Spi_SendData(0x0f);
-            // Spi_SendData(0x1f);
-            // Spi_SendData(0x3f);
-            // Spi_SendData(0x7f);
-            // Spi_SendData(0xff);
-
-            // Spi_SendData(0x01);
-            // Spi_SendData(0x03);
-            // Spi_SendData(0x07);
-            // Spi_SendData(0x0f);
-            // Spi_SendData(0x1f);
-            // Spi_SendData(0x3f);
-            // Spi_SendData(0x7f);
-            // Spi_SendData(0xff);
-
-    // for (; i < 152; i++)
-    // {
-    //     for (j = 0; j < 19; j++)
-    //     {
-    //         Spi_SendData(data);
-    //     }
-    // }
-
-
-    // for (i = 0; i < 52; i++)
-    // {
-    //     for (j = 0; j < 9; j++)
-    //     {
-    //         Spi_SendData(data);
-    //     }
-
-    //     for (j = 10; j < 19; j++)
-    //     {
-    //         Spi_SendData(0xff);
-    //     }
-
-    // }
-    // for (i = 53; i < 152; i++)
-    // {
-    //     for (j = 0; j < 19; j++)
-    //     {
-    //         Spi_SendData(0xff);
-    //     }
-    // }
-
-    Spi_SetCS(TRUE);
-    DC_L;
-    delay1ms(2);
-
-    spiWriteCmd(0x12);
-} 
 
 void EPD_poweroff(void)
 {

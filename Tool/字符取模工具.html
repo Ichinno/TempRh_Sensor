@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符取模工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #output {
+            font-family: monospace;
+            white-space: pre;
+            margin-top: 20px;
+        }
+        #byteOutput {
+            font-family: monospace;
+            white-space: pre;
+            margin-top: 20px;
+        }
+        canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>字符取模工具</h1>
+    <p>请输入字符并查看其像素图：</p>
+    <input type="text" id="inputChar" maxlength="100" placeholder="输入字符" />
+    <br><br>
+    <label for="font">选择字体:</label>
+    <select id="font">
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="SimSun">宋体</option>
+        <option value="Microsoft YaHei">微软雅黑</option>
+        <option value="KaiTi">楷体</option>
+    </select>
+    <br><br>
+    <label for="fontSize">选择字号:</label>
+    <select id="fontSize">
+        <option value="24">24px</option>
+        <option value="32">32px</option>
+        <option value="40">40px</option>
+        <option value="48">48px</option>
+        <option value="56">56px</option>
+        <option value="64">64px</option>
+        <option value="72">72px</option>
+        <option value="80">80px</option>
+    </select>
+    <br><br>
+    <button onclick="generatePixel()">生成像素图</button>
+    
+    <div id="output"></div>
+    <br>
+    <div id="byteOutput"></div>
+    <div id="byteInfo"></div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        function generatePixel() {
+            const inputChars = document.getElementById('inputChar').value;
+            const fontSize = document.getElementById('fontSize').value;
+            const font = document.getElementById('font').value;
+
+            if (inputChars.length === 0) {
+                alert('请输入字符');
+                return;
+            }
+
+            let outputPixelMap = '';
+            let outputByteMap = '';
+            let totalBytes = 0;
+            let totalRows = 0;
+            let totalCols = 0;
+
+            // 对于每个字符生成点阵图
+            for (let char of inputChars) {
+                // 获取canvas和上下文
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // 设置画布尺寸
+                canvas.width = fontSize * 3; // 默认画布宽度
+                canvas.height = fontSize * 3; // 默认画布高度
+
+                // 设置字体
+                ctx.font = fontSize + 'px ' + font;
+                ctx.fillStyle = 'black';
+
+                // 在画布上绘制字符，位于画布的左上角
+                ctx.fillText(char, 0, fontSize);
+
+                // 获取像素数据
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+
+                // 将像素数据转换为0和1的数组
+                let pixelArray = [];
+                for (let y = 0; y < canvas.height; y++) {
+                    for (let x = 0; x < canvas.width; x++) {
+                        const i = (y * canvas.width + x) * 4;
+                        const a = data[i + 3]; // Alpha channel
+
+                        // 透明度大于128则为1，否则为0
+                        pixelArray.push(a > 128 ? 1 : 0);
+                    }
+                }
+
+                // 计算图像的最左、最右、最上、最下的1所在的位置
+                let minX = canvas.width, maxX = 0, minY = canvas.height, maxY = 0;
+                for (let i = 0; i < canvas.height; i++) {
+                    for (let j = 0; j < canvas.width; j++) {
+                        if (pixelArray[i * canvas.width + j] === 1) {
+                            minX = Math.min(minX, j);
+                            maxX = Math.max(maxX, j);
+                            minY = Math.min(minY, i);
+                            maxY = Math.max(maxY, i);
+                        }
+                    }
+                }
+
+                // 计算字符区域的宽度和高度
+                const charWidth = maxX - minX + 1;
+                const charHeight = maxY - minY + 1;
+
+                // 不固定尺寸，去除空白部分
+                let croppedPixelArray = [];
+                for (let i = minY; i <= maxY; i++) {
+                    for (let j = minX; j <= maxX; j++) {
+                        croppedPixelArray.push(pixelArray[i * canvas.width + j]);
+                    }
+                }
+
+                // 获取裁剪后的宽度和高度
+                const croppedWidth = maxX - minX + 1;
+                const croppedHeight = maxY - minY + 1;
+
+                // 输出裁剪后的点阵图
+                let pixelMap = '';
+                for (let i = 0; i < croppedHeight; i++) {
+                    let row = '';
+                    for (let j = 0; j < croppedWidth; j++) {
+                        row += croppedPixelArray[i * croppedWidth + j] === 1 ? '■' : '□';
+                    }
+                    pixelMap += row + '\n';
+                }
+
+                outputPixelMap += pixelMap + '\n';
+
+                // 输出croppedPixelArray数组的值，并将其转换为字节数组
+                let byteArray = [];
+                let rowBytes = Math.ceil(croppedWidth / 8);
+                for (let i = 0; i < croppedHeight; i++) {
+                    let rowByte = 0;
+                    for (let j = 0; j < croppedWidth; j++) {
+                        if (croppedPixelArray[i * croppedWidth + j] === 1) {
+                            // 设置每个像素值对应的字节
+                            rowByte |= (1 << (7 - j % 8));
+                        }
+                        if ((j + 1) % 8 === 0 || j === croppedWidth - 1) {
+                            byteArray.push(rowByte);
+                            rowByte = 0;
+                        }
+                    }
+                }
+
+                // 输出字节数组
+                let byteMap = '';
+                for (let i = 0; i < byteArray.length; i++) {
+                    byteMap += '0x' + byteArray[i].toString(16).padStart(2, '0') + ', ';
+                    if ((i + 1) % rowBytes === 0) {
+                        byteMap += '\n';
+                    }
+                }
+
+                outputByteMap += byteMap + '\n';
+
+                // 计算总的字节数、行数和列数
+                totalRows += croppedHeight;
+                totalCols = Math.max(totalCols, rowBytes);
+                totalBytes += byteArray.length;
+            }
+
+            document.getElementById('output').textContent = outputPixelMap;
+            document.getElementById('byteOutput').textContent = outputByteMap;
+            document.getElementById('byteInfo').textContent = `宽度（字节）: ${totalCols}\n高度（行数）: ${totalRows}\n总字节数: ${totalBytes}`;
+        }
+    </script>
+</body>
+</html>
